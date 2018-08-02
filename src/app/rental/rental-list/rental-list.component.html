@@ -1,0 +1,9 @@
+<section id="rentalListing">
+  <h1 class="title">Your Home All Around the World</h1>
+  <div class="row">
+    <div class='col-md-3 col-xs-6'
+      *ngFor="let rental of rentals">
+      <bnb-rental-list-entry [rentalEntry]="rental"></bnb-rental-list-entry>
+    </div>
+  </div>
+</section>
