@@ -5,6 +5,8 @@ import { RentalListComponent } from './rental-list/rental-list.component';
 import { RentalListEntryComponent } from './rental-list-entry/rental-list-entry.component';
 import { RentalComponent } from './rental.component';
 
+import { RentalService } from './shared/rental.service';
+
 @NgModule({
   declarations: [
     RentalListComponent,
@@ -13,6 +15,9 @@ import { RentalComponent } from './rental.component';
   ],
   imports: [
     CommonModule,
+  ],
+  providers: [
+    RentalService
   ]
 })
 export class RentalModule {
