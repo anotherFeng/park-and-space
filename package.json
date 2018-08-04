@@ -5,8 +5,8 @@
     "start": "node server/index.js",
     "dev": "nodemon server/index.js",
     "ng": "ng",
-    "ng start": "ng serve",
-    "ng build": "ng build",
+    "ng-start": "ng serve --proxy-config proxy.conf.json",
+    "ng-build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -26,6 +26,7 @@
     "core-js": "^2.5.4",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "font-awesome": "^4.7.0",
     "mongoose": "^5.2.6",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
