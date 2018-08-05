@@ -39,4 +39,5 @@ const routes: Routes = [
     RentalService
   ]
 })
+
 export class RentalModule {}

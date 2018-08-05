@@ -1,4 +1,4 @@
-const Rental = require('../../database/models/rental');
+const Rental = require('../../database/models/rentalModel');
 
 exports.getRentals = (req, res) => {
   Rental.find({})
