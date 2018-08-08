@@ -26,7 +26,11 @@ const userSchema = new Schema({
     required: 'password is required',
   },
   rentals: [{type: Schema.Types.ObjectId, ref: 'Rental'}]
-})
+});
+
+userSchema.methods.hasSamePassword = function(requestedPassword){
+  return bcrypt.compareSync(requestedPassword, this.password)
+}
 
 userSchema.pre('save', function(next) {
   const user = this;
@@ -46,14 +50,14 @@ module.exports.User = User;
 exports.checkEmail = (email) => {
   return new Promise((resolve, reject) => {
     User.findOne({email})
-    .then((found) => {
-      resolve(found);
-    })
-    .catch((error) => {
-      reject(error);
-    })
-  })
-}
+      .then((found) => {
+        resolve(found);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
 
 exports.createNewUser = (user) => {
   return new Promise((resolve, reject) => {
@@ -64,6 +68,18 @@ exports.createNewUser = (user) => {
       })
       .catch((error) => {
         reject(error);
+      });
+  });
+};
+
+exports.findUser = (email) => {
+  return new Promise((resolve, reject) => {
+    User.findOne({email})
+      .then((user) => {
+        resolve(user);
       })
-  })
-}
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
