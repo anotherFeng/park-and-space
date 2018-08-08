@@ -16,7 +16,7 @@ exports.login = (req, res) => {
           userId: foundUser.id,
           username: foundUser.username
         }, process.env.JWT_SECRET, {expiresIn: '1h'});
-        
+
         return res.json(token);
       } else {
         res.status(422).send("Wrong email or password");
@@ -51,4 +51,27 @@ exports.register = async (req, res) => {
     .catch((error) => {
       return res.status(422).send("save failed")
     })
+};
+
+exports.authMiddleware = (req, res, next) => {
+  const token = req.headers.authorization;
+  if(token) {
+    const user = parseToken(token);
+    User.findUserById(user.userId)
+      .then((user) => {
+        res.locals.user = user;
+        next();
+      })
+      .catch((err) => {
+        res.status(422).send(err);
+      })
+  } else {
+    res.status(422).send("email already exist");
+  }
 }
+
+parseToken = (token) => {
+  const decoded = jwt.verify(token.split(' ')[1], process.env.JWT_SECRET);
+  return decoded;
+}
+

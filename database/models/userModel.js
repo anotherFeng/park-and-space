@@ -83,3 +83,15 @@ exports.findUser = (email) => {
       });
   });
 };
+
+exports.findUserById = (userId) => {
+  return new Promise((resolve, reject) => {
+    User.findById(userId)
+      .then((found) => {
+        resolve(found);
+      })
+      .catch((err) => {
+        reject(err);
+      })
+  })
+}
