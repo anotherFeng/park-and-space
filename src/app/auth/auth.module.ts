@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
+import { AuthService } from './auth.service';
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent }
@@ -21,6 +23,8 @@ const routes: Routes = [
     FormsModule,
     CommonModule
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
 })
 export class AuthModule { }
