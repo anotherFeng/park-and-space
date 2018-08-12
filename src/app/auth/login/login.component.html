@@ -1,3 +1,56 @@
-<p>
-  login works!
-</p>
+<section id="login">
+  <div class="bwm-form">
+    <div class="row">
+      <div class="col-md-5">
+        <h1>Login</h1>
+        <form [formGroup]="loginForm">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email"
+              class="form-control"
+              id="email"
+              formControlName="email">
+              <div *ngIf="isInvalidInput('email')"
+                class="alert alert-danger">
+                <div *ngIf="isRequired('email')">
+                  Email is required.
+                </div>
+                <div *ngIf="isValidEmail('email')">
+                  Must be valid email format!
+                </div>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password"
+              class="form-control"
+              id="password"
+              formControlName="password">
+              <!-- <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                class="alert alert-danger">
+                <div *ngIf="password.errors.required">
+                  Please enter your login password.
+                </div>
+              </div> -->
+          </div>
+          <button 
+            [disabled]="!loginForm.valid"
+            type="submit" 
+            class="btn btn-bwm"
+            (click)="login()">
+            Submit
+          </button>
+        </form>
+        <div *ngIf="error" class="alert alert-danger">
+          <p>{{error}}</p>
+        </div>
+      </div>
+      <div class="col-md-6 ml-auto">
+        <div class="image-container">
+          <h2 class="catchphrase">Hundreds of awesome places in reach of few clicks.</h2>
+          <img src="assets/images/login-image.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -76,6 +76,9 @@
             Submit
           </button>
         </form>
+        <div *ngIf="error" class="alert alert-danger">
+          <p>{{error}}</p>
+        </div>
       </div>
       <div class="col-md-6 ml-auto">
         <div class="image-container">
