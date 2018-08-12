@@ -18,7 +18,7 @@
         </li>
       </ng-container>
       <li *ngIf="authService.isAuthenticated()" class="nav-item">
-        <a class="nav-link" (click)="logout()">Logout</a>
+        <a class="nav-link" (click)="logout()"><span>{{authService.getUsername()}}</span> Logout</a>
       </li>
     </ul>
   </div>

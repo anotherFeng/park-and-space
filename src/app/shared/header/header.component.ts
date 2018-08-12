@@ -14,7 +14,7 @@ export class HeaderComponent {
     private router: Router;
   ) {}
 
-  logout() {
+  public logout(): void {
     this.authService.logout();
     this.router.navigate(['/rentals']);
   }

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as moment from 'moment';
 import 'rxjs/Rx';
+const jwt = new JwtHelperService();
 
 class DecodedToken {
   exp: number = 0;
@@ -15,11 +16,10 @@ export class AuthService {
   private decodedToken;
 
   constructor(private http: HttpClient) {
-    this.decodedToken = JSON.parse(localStorage.getItem('ngn-meta')) || new DecodedToken;
+    this.decodedToken = JSON.parse(localStorage.getItem('ngn_meta')) || new DecodedToken;
   }
 
   private saveToken(token: string): string {
-    const jwt = new JwtHelperService();
     this.decodedToken = jwt.decodeToken(token);
     localStorage.setItem('ngn_auth', token);
     localStorage.setItem('ngn_meta', JSON.stringify(this.decodedToken));
