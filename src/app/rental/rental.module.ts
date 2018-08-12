@@ -13,11 +13,13 @@ import { RentalDetailComponent } from './rental-detail/rental-detail.component';
 
 import { UppercasePipe } from '../shared/pipes/uppercase.pipe';
 
+import { AuthGuard } from '../auth/auth.guard';
+
 const routes: Routes = [
   {path: 'rentals', component: RentalComponent, 
     children: [
       { path: '', component: RentalListComponent },
-      { path: ':rentalId', component: RentalDetailComponent }
+      { path: ':rentalId', component: RentalDetailComponent, canActivate: [AuthGuard] }
     ]},
 ]
 

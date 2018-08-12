@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'bnb-login',
@@ -11,16 +11,23 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  error: string;
-  
+  error: string = '';
+  notifyMessage: string = '';
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.initForm();
+    this.activatedRoute.params.subscribe((params) => {
+      if(params['registered'] === 'success'){
+        this.notifyMessage = 'You have been successfully registered'
+      }
+    })
   }
 
   initForm() {
@@ -47,7 +54,6 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.loginForm.value).subscribe(
       (token) => {
-        debugger;
         this.router.navigate(['/rentals']);
       },
       (err) => {

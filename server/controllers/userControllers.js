@@ -46,7 +46,7 @@ exports.register = async (req, res) => {
       }
     })
     .then(() => {
-      return res.status(201).send("register completed");
+      return res.json({'registered': true});;
     })
     .catch((error) => {
       return res.status(422).send("save failed")
