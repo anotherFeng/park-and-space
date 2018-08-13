@@ -4,11 +4,11 @@ require('dotenv').config();
 
 exports.login = (req, res) => {
   const { email, password } = req.body;
-
+  console.log(req)
   if(!password || !email) {
     return res.status(422).send('Data missing!')
   };
-
+  
   User.findUser(email)
     .then((foundUser) => {
       if(foundUser.hasSamePassword(password)) {

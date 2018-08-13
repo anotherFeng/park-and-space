@@ -16,4 +16,20 @@ const rentalSchema = new Schema({
   bookings: [{ type: Schema.Types.ObjectId, ref: 'Booking'}]
 });
 
-module.exports = mongoose.model('Rental', rentalSchema);
+const Rental = mongoose.model('Rental', rentalSchema);
+module.exports.Rental = Rental;
+
+exports.findRentalById = (rentalId) => {
+  return new Promise((resolve, reject) => {
+    Rental.findById(rentalId)
+    .populate('bookins')
+    .populate('user')
+    .exec()
+    .then((foundRental) => {
+      resolve(foundRental);
+    })
+    .catch((err) => {
+      reject(err);
+    })
+  })
+}

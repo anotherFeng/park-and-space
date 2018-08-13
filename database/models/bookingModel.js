@@ -12,4 +12,10 @@ const bookingSchema = new Schema({
   rental: { type: Schema.Types.ObjectId, ref: 'Rental'},
 });
 
-module.exports = mongoose.model('Booking', bookingSchema);
+ const Booking = mongoose.model('Booking', bookingSchema);
+ module.exports.Booking = Booking;
+
+ exports.saveBooking = (requestBody) => {
+  const { startAt, endAt, totalPrice, guests, days } = requestBody;
+  const booking = new Booking({startAt, endAt, totalPrice, guests, days})
+ }
