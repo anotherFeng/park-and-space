@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MapModule } from '../shared/map/map.module';
+import { Daterangepicker } from 'ng2-daterangepicker';
 
 import { RentalListComponent } from './rental-list/rental-list.component';
 import { RentalListEntryComponent } from './rental-list-entry/rental-list-entry.component';
 import { RentalComponent } from './rental.component';
+import { RentalBookingComponent } from './rental-detail/rental-booking/rental-booking.component';
 
 import { RentalService } from './rental.service';
 import { RentalDetailComponent } from './rental-detail/rental-detail.component';
-
 import { UppercasePipe } from '../shared/pipes/uppercase.pipe';
-
 import { AuthGuard } from '../auth/auth.guard';
 
 const routes: Routes = [
@@ -29,13 +29,15 @@ const routes: Routes = [
     RentalListEntryComponent,
     RentalComponent,
     RentalDetailComponent,
-    UppercasePipe
+    UppercasePipe,
+    RentalBookingComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     HttpClientModule,
-    MapModule
+    MapModule,
+    Daterangepicker
   ],
   providers: [
     RentalService

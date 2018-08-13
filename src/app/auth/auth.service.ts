@@ -51,6 +51,10 @@ export class AuthService {
     return isAuth
   };
 
+  public getAuthToken(): string {
+    return localStorage.getItem('ngn_auth');
+  }
+
   public getUsername(): string {
     return this.decodedToken.username;
   }
