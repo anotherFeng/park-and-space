@@ -26,6 +26,7 @@ exports.findRentalById = (rentalId) => {
     .populate('user')
     .exec()
     .then((foundRental) => {
+      console.log(foundRental)
       resolve(foundRental);
     })
     .catch((err) => {

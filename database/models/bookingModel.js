@@ -12,10 +12,17 @@ const bookingSchema = new Schema({
   rental: { type: Schema.Types.ObjectId, ref: 'Rental'},
 });
 
- const Booking = mongoose.model('Booking', bookingSchema);
- module.exports.Booking = Booking;
+const Booking = mongoose.model('Booking', bookingSchema);
+module.exports.Booking = Booking;
 
- exports.saveBooking = (requestBody) => {
-  const { startAt, endAt, totalPrice, guests, days } = requestBody;
-  const booking = new Booking({startAt, endAt, totalPrice, guests, days})
+exports.saveBooking = (requestBody) => {
+  return new Promise((resolve, reject) => {
+    const { startAt, endAt, totalPrice, guests, days } = requestBody;
+    const booking = new Booking({startAt, endAt, totalPrice, guests, days})
+    booking.save()
+      .then((savedBooking) => {
+        resolve(savedBooking);
+      })
+  })
+
  }
