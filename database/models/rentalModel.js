@@ -12,7 +12,25 @@ const rentalSchema = new Schema({
   description: { type: String, required: true },
   dailyRate: Number,
   createdAt: { type: Date, default: Date.now },
-  user: {type: Schema.Types.ObjectId, ref: 'User'}
+  user: {type: Schema.Types.ObjectId, ref: 'User'},
+  bookings: [{ type: Schema.Types.ObjectId, ref: 'Booking'}]
 });
 
-module.exports = mongoose.model('Rental', rentalSchema);
+const Rental = mongoose.model('Rental', rentalSchema);
+module.exports.Rental = Rental;
+
+exports.findRentalById = (rentalId) => {
+  return new Promise((resolve, reject) => {
+    Rental.findById(rentalId)
+    .populate('bookings')
+    .populate('user')
+    .exec()
+    .then((foundRental) => {
+      console.log(foundRental)
+      resolve(foundRental);
+    })
+    .catch((err) => {
+      reject(err);
+    })
+  })
+}
