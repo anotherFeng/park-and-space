@@ -22,7 +22,7 @@ module.exports.Rental = Rental;
 exports.findRentalById = (rentalId) => {
   return new Promise((resolve, reject) => {
     Rental.findById(rentalId)
-    .populate('bookins')
+    .populate('bookings')
     .populate('user')
     .exec()
     .then((foundRental) => {
