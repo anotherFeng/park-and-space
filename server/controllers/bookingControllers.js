@@ -1,6 +1,7 @@
+const moment = require('moment');
+const { User } = require('../../database/models/userModel');
 const Booking = require('../../database/models/bookingModel');
 const Rental = require('../../database/models/rentalModel');
-const moment = require('moment');
 
 exports.createBooking = (req, res) => {
   const { startAt, endAt, rental } = req.body;
@@ -11,12 +12,13 @@ exports.createBooking = (req, res) => {
         res.status(422).send("Cannot create booking on your own rental");
       } else {
         if(isValidBooking(foundRental, startAt, endAt)) {
-          Booking.saveBooking(req.body)
+          Booking.saveBooking(req.body, user, foundRental)
             .then((savedBooking) => {
               foundRental.bookings.push(savedBooking);
               foundRental.save();
+              User.update({_id: user.id}, {$push: {bookings: savedBooking}}, function(){}) //doesn't work without call back
+              res.json({ startAt: savedBooking.startAt, endAt: savedBooking.endAt });
             })
-          res.json({'created': true});
         } else {
           res.status(422).send("Selected dates are already taken.");
         }

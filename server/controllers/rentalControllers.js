@@ -1,7 +1,9 @@
-const Rental = require('../../database/models/rentalModel');
+const { Rental } = require('../../database/models/rentalModel');
 
 exports.getRentals = (req, res) => {
   Rental.find({})
+    .select('-bookings')
+    .exec()
     .then((found) => {
       res.json(found);
     })
@@ -13,6 +15,9 @@ exports.getRentals = (req, res) => {
 exports.getRentalById = (req, res) => {
   const rentalId = req.params.id;
   Rental.findById(rentalId)
+    .populate('user', 'username -_id')
+    .populate('bookings', 'startAt endAt -_id')
+    .exec()
     .then((found) => {
       res.json(found);
     })

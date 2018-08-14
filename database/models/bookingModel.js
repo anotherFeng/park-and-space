@@ -15,14 +15,16 @@ const bookingSchema = new Schema({
 const Booking = mongoose.model('Booking', bookingSchema);
 module.exports.Booking = Booking;
 
-exports.saveBooking = (requestBody) => {
+exports.saveBooking = (requestBody, user, rental) => {
   return new Promise((resolve, reject) => {
     const { startAt, endAt, totalPrice, guests, days } = requestBody;
-    const booking = new Booking({startAt, endAt, totalPrice, guests, days})
+    const booking = new Booking({startAt, endAt, totalPrice, guests, days, user, rental})
     booking.save()
       .then((savedBooking) => {
         resolve(savedBooking);
       })
+      .catch((err) => {
+        reject(err);
+      })
   })
-
  }
