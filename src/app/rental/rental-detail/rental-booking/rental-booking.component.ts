@@ -1,4 +1,5 @@
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, Input } from '@angular/core';
 import { Booking } from '../../../booking/booking.model';
@@ -31,8 +32,10 @@ export class RentalBookingComponent implements OnInit {
   constructor(
     private helperService: HelperService,
     private bookingService: BookingService,
+    private toastrService: ToastrService,
     private modalService: NgbModal
-  ) { };
+  ) { 
+  };
 
   ngOnInit() {
     this.newBooking = new Booking;
@@ -70,6 +73,7 @@ export class RentalBookingComponent implements OnInit {
         this.addNewBookedDates(response)
         this.newBooking = new Booking();
         this.modalRef.close();
+        this.toastrService.success(`Congratulation! You have succesfully booked this rental place!`, `Success`)
       },
       (err) => {
         this.error = err.error;
