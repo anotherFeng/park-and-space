@@ -9,9 +9,10 @@ import { RentalListComponent } from './rental-list/rental-list.component';
 import { RentalListEntryComponent } from './rental-list-entry/rental-list-entry.component';
 import { RentalComponent } from './rental.component';
 import { RentalBookingComponent } from './rental-detail/rental-booking/rental-booking.component';
+import { RentalDetailComponent } from './rental-detail/rental-detail.component';
 
 import { RentalService } from './rental.service';
-import { RentalDetailComponent } from './rental-detail/rental-detail.component';
+import { HelperService } from '../shared/service/helper.service';
 import { UppercasePipe } from '../shared/pipes/uppercase.pipe';
 import { AuthGuard } from '../auth/auth.guard';
 
@@ -40,7 +41,8 @@ const routes: Routes = [
     Daterangepicker
   ],
   providers: [
-    RentalService
+    RentalService,
+    HelperService
   ]
 })
 

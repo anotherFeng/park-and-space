@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Booking } from '../../../booking/booking.model';
+import { HelperService } from '../../../shared/service/helper.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'bnb-rental-booking',
@@ -8,22 +11,42 @@ import { Component, OnInit, Input } from '@angular/core';
 export class RentalBookingComponent implements OnInit {
 
   @Input() dailyRate: number;
+  @Input() bookings: Booking[];
 
-  constructor() { }
+  dateRange: any = {};
+  bookedOutDates: any[] = [];
 
-  ngOnInit() {
-  }
+  public options: any = {
+    locale: { format: Booking.DATE_FORMATE },
+    alwaysShowCalendars: false,
+    opens: 'left',
+    isInvalidDate: this.checkForInvalidDates.bind(this)
+  };
+
+  constructor(
+    private helperService: HelperService
+  ) { }
 
   public daterange: any = {};
 
-  public options: any = {
-      locale: { format: 'YYYY-MM-DD' },
-      alwaysShowCalendars: false,
-      opens: 'left'
-  };
+  ngOnInit() {
+    this.getBookedOutDate();
+  }
+
+  private checkForInvalidDates(date) {
+    return this.bookedOutDates.includes(date.format(Booking.DATE_FORMATE)) || date.diff(moment(), 'days') < 0;
+  }
+ 
+  private getBookedOutDate() {
+    if(this.bookings && this.bookings.length > 0) {
+      this.bookings.forEach((booking: Booking) => {
+        const bookedRange = this.helperService.getRangeOfDates(booking.startAt, booking.endAt);
+        this.bookedOutDates.push(...bookedRange);
+      })
+    }
+  }
 
   public selectedDate(value: any, datepicker?: any) {
-      console.log(value);
       datepicker.start = value.start;
       datepicker.end = value.end;
       this.daterange.start = value.start;
