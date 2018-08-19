@@ -37,17 +37,18 @@
     </button>
   </div>
   <div class="modal-body">
-    <form>
-      <em>{{newBooking.days}}</em> nights /
-      <em>{{rental.dailyRate}}</em> per night
-      <p>Guest: <em>{{newBooking.guests}}</em></p>
-      <p>Price: <em>{{newBooking.totalPrice}}$</em></p>
+    <em>{{newBooking.days}}</em> nights /
+    <em>{{rental.dailyRate}}</em> per night
+    <p>Guest: <em>{{newBooking.guests}}</em></p>
+    <p>Price: <em>{{newBooking.totalPrice}}$</em></p>
 
-      <p>Please confirm the booking</p>
-    </form>
+    <p>Please confirm the booking</p>
+  </div>
+  <div *ngIf="error" class="alert alert-danger modal-error">
+    <p>{{error}}</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-bwm" (click)="createBooking()">Confirm</button>
-    <button type="button" class="btn btn-bwm" (click)="c('Save click')">Save</button>
+    <button type="button" class="btn btn-bwm" (click)="c('Save click')">Cancel</button>
   </div>
 </ng-template>

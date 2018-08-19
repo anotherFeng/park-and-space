@@ -19,6 +19,7 @@ export class RentalBookingComponent implements OnInit {
   modalRef: any;
   daterange: any = {};
   bookedOutDates: any[] = [];
+  error: string = '';
 
   public options: any = {
     locale: { format: Booking.DATE_FORMAT },
@@ -52,22 +53,29 @@ export class RentalBookingComponent implements OnInit {
     };
   };
 
+  private addNewBookedDates(bookingInfo: any) {
+    const bookedRange = this.helperService.getBookingRangeOfDates(bookingInfo.startAt, bookingInfo.endAt, Booking.DATE_FORMAT);
+    this.bookedOutDates.push(...bookedRange);
+  }
+
   public openConfirmModal(content) {
+    this.error = '';
     this.modalRef = this.modalService.open(content);
   };
 
   public createBooking() {
     this.newBooking.rental = this.rental;
     this.bookingService.createBooking(this.newBooking).subscribe(
-      (bookingDate) => {
+      (response: any) => {
+        this.addNewBookedDates(response)
         this.newBooking = new Booking();
         this.modalRef.close();
       },
-      () => {
-        console.log("fail")
+      (err) => {
+        this.error = err.error;
       }
-    )
-  }
+    );
+  };
 
   public selectedDate(value: any, datepicker?: any) {
       this.newBooking.startAt = this.helperService.formatBookingDate(value.start);
