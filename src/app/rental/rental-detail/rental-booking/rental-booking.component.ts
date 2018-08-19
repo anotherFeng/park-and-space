@@ -11,8 +11,12 @@ export class RentalBookingComponent implements OnInit {
 
   @Input() dailyRate: number;
   @Input() bookings: Booking[];
+
+  dateRange: any = {};
+  bookedOutDates: any[] = [];
+
   public options: any = {
-    locale: { format: 'YYYY-MM-DD' },
+    locale: { format: 'Y-MM-DD' },
     alwaysShowCalendars: false,
     opens: 'left'
   };
@@ -30,7 +34,8 @@ export class RentalBookingComponent implements OnInit {
   private getBookedOutDate() {
     if(this.bookings && this.bookings.length > 0) {
       this.bookings.forEach((booking: Booking) => {
-        this.helperService.getRangeOfDates(booking.startAt, booking.endAt)
+        const bookedRange = this.helperService.getRangeOfDates(booking.startAt, booking.endAt);
+        this.bookedOutDates.push(...bookedRange);
       })
     }
   }
