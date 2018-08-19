@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Booking } from '../../../booking/booking.model';
 import { HelperService } from '../../../shared/service/helper.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'bnb-rental-booking',
@@ -16,9 +17,10 @@ export class RentalBookingComponent implements OnInit {
   bookedOutDates: any[] = [];
 
   public options: any = {
-    locale: { format: 'Y-MM-DD' },
+    locale: { format: Booking.DATE_FORMATE },
     alwaysShowCalendars: false,
-    opens: 'left'
+    opens: 'left',
+    isInvalidDate: this.checkForInvalidDates.bind(this)
   };
 
   constructor(
@@ -31,6 +33,10 @@ export class RentalBookingComponent implements OnInit {
     this.getBookedOutDate();
   }
 
+  private checkForInvalidDates(date) {
+    return this.bookedOutDates.includes(date.format(Booking.DATE_FORMATE)) || date.diff(moment(), 'days') < 0;
+  }
+ 
   private getBookedOutDate() {
     if(this.bookings && this.bookings.length > 0) {
       this.bookings.forEach((booking: Booking) => {
@@ -41,7 +47,6 @@ export class RentalBookingComponent implements OnInit {
   }
 
   public selectedDate(value: any, datepicker?: any) {
-      console.log(value);
       datepicker.start = value.start;
       datepicker.end = value.end;
       this.daterange.start = value.start;
