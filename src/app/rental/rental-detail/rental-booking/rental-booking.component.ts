@@ -13,11 +13,13 @@ export class RentalBookingComponent implements OnInit {
   @Input() dailyRate: number;
   @Input() bookings: Booking[];
 
-  dateRange: any = {};
+  newBooking: Booking;
+  daterange: any = {};
   bookedOutDates: any[] = [];
 
+
   public options: any = {
-    locale: { format: Booking.DATE_FORMATE },
+    locale: { format: Booking.DATE_FORMAT },
     alwaysShowCalendars: false,
     opens: 'left',
     isInvalidDate: this.checkForInvalidDates.bind(this)
@@ -27,28 +29,29 @@ export class RentalBookingComponent implements OnInit {
     private helperService: HelperService
   ) { }
 
-  public daterange: any = {};
-
   ngOnInit() {
+    this.newBooking = new Booking;
     this.getBookedOutDate();
   }
 
   private checkForInvalidDates(date) {
-    return this.bookedOutDates.includes(date.format(Booking.DATE_FORMATE)) || date.diff(moment(), 'days') < 0;
+    return this.bookedOutDates.includes(this.helperService.formatBookingDate(date)) || date.diff(moment(), 'days') < 0;
   }
  
   private getBookedOutDate() {
     if(this.bookings && this.bookings.length > 0) {
       this.bookings.forEach((booking: Booking) => {
-        const bookedRange = this.helperService.getRangeOfDates(booking.startAt, booking.endAt);
+        const bookedRange = this.helperService.getBookingRangeOfDates(booking.startAt, booking.endAt, Booking.DATE_FORMAT);
         this.bookedOutDates.push(...bookedRange);
       })
     }
   }
 
   public selectedDate(value: any, datepicker?: any) {
-      datepicker.start = value.start;
-      datepicker.end = value.end;
+      this.newBooking.startAt = this.helperService.formatBookingDate(value.start);
+      this.newBooking.endAt = this.helperService.formatBookingDate(value.end);
+      this.newBooking.days = -(value.start.diff(value.end, 'days'));
+      console.log(this.newBooking)
       this.daterange.start = value.start;
       this.daterange.end = value.end;
       this.daterange.label = value.label;
