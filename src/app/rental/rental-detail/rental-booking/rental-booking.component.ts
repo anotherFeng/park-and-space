@@ -1,9 +1,10 @@
 import * as moment from 'moment';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, Input } from '@angular/core';
 import { Booking } from '../../../booking/booking.model';
 import { Rental } from '../../rental.model';
 import { HelperService } from '../../../shared/service/helper.service';
+import { BookingService } from '../../../booking/booking.service';
 
 @Component({
   selector: 'bnb-rental-booking',
@@ -15,6 +16,7 @@ export class RentalBookingComponent implements OnInit {
   @Input() rental: Rental;
 
   newBooking: Booking;
+  modalRef: any;
   daterange: any = {};
   bookedOutDates: any[] = [];
 
@@ -27,6 +29,7 @@ export class RentalBookingComponent implements OnInit {
 
   constructor(
     private helperService: HelperService,
+    private bookingService: BookingService,
     private modalService: NgbModal
   ) { };
 
@@ -50,8 +53,21 @@ export class RentalBookingComponent implements OnInit {
   };
 
   public openConfirmModal(content) {
-    this.modalService.open(content);
+    this.modalRef = this.modalService.open(content);
   };
+
+  public createBooking() {
+    this.newBooking.rental = this.rental;
+    this.bookingService.createBooking(this.newBooking).subscribe(
+      (bookingDate) => {
+        this.newBooking = new Booking();
+        this.modalRef.close();
+      },
+      () => {
+        console.log("fail")
+      }
+    )
+  }
 
   public selectedDate(value: any, datepicker?: any) {
       this.newBooking.startAt = this.helperService.formatBookingDate(value.start);
