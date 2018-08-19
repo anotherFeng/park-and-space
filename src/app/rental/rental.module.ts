@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MapModule } from '../shared/map/map.module';
 import { Daterangepicker } from 'ng2-daterangepicker';
+import { FormsModule } from '@angular/forms';
 
 import { RentalListComponent } from './rental-list/rental-list.component';
 import { RentalListEntryComponent } from './rental-list-entry/rental-list-entry.component';
@@ -38,7 +39,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     HttpClientModule,
     MapModule,
-    Daterangepicker
+    Daterangepicker,
+    FormsModule
   ],
   providers: [
     RentalService,
