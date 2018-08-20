@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Rental } from '../rental.model';
+import { RentalService } from '../rental.service';
 
 @Component({
   selector: 'bnb-rental-create',
@@ -9,12 +10,12 @@ import { Rental } from '../rental.model';
 export class RentalCreateComponent implements OnInit {
 
   newRental: Rental;
-  rentalCategories: string[] = [
-    'condo',
-    'house'
-  ]
+  rentalCategories: string[] = Rental.CATEGORIES;
+  error: string = '';
 
-  constructor() { }
+  constructor(
+    private rentalService: RentalService;
+  ) { }
 
   ngOnInit() {
     this.newRental = new Rental();
@@ -22,6 +23,17 @@ export class RentalCreateComponent implements OnInit {
   }
 
   createRental() {
-    console.log(this.newRental)
+    this.rentalService.createRental(this.newRental).subscribe(
+      (response) => {
+        
+      },
+      (err) => {
+        this.error = err.error;
+      }
+    )
+  };
+
+  handleImageChange() {
+    this.newRental.image = "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg";
   }
 }
