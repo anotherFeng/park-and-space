@@ -11,6 +11,7 @@ import { RentalListEntryComponent } from './rental-list-entry/rental-list-entry.
 import { RentalComponent } from './rental.component';
 import { RentalBookingComponent } from './rental-detail/rental-booking/rental-booking.component';
 import { RentalDetailComponent } from './rental-detail/rental-detail.component';
+import { RentalSearchComponent } from './rental-search/rental-search.component';
 
 import { RentalService } from './rental.service';
 import { BookingService } from '../booking/booking.service';
@@ -23,6 +24,7 @@ const routes: Routes = [
     children: [
       { path: '', component: RentalListComponent },
       { path: ':rentalId', component: RentalDetailComponent, canActivate: [AuthGuard] }
+      { path: ':city/homes', component: RentalSearchComponent }
     ]},
 ]
 
@@ -33,7 +35,8 @@ const routes: Routes = [
     RentalComponent,
     RentalDetailComponent,
     UppercasePipe,
-    RentalBookingComponent
+    RentalBookingComponent,
+    RentalSearchComponent
   ],
   imports: [
     CommonModule,
