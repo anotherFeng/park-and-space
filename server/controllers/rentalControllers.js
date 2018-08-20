@@ -1,15 +1,32 @@
 const { Rental } = require('../../database/models/rentalModel');
 
 exports.getRentals = (req, res) => {
-  Rental.find({})
-    .select('-bookings')
-    .exec()
-    .then((found) => {
-      res.json(found);
-    })
-    .catch((err) => {
-      res.status(404).send(err);
-    })
+  const city = req.query.city;
+  if(city) {
+    Rental.find({city: city.toLowerCase()})
+      .select('-bookings')
+      .exec()
+      .then((found) => {
+        if(found.length === 0) {
+          res.status(422).send(`No rental found in city of ${city.toLowerCase()}`)
+        }
+        res.json(found);
+      })
+      .catch((err) => {
+        console.log(err)
+        res.status(404).send(err)
+      })
+  } else {
+    Rental.find({})
+      .select('-bookings')
+      .exec()
+      .then((found) => {
+        res.json(found);
+      })
+      .catch((err) => {
+        res.status(404).send(err);
+      })
+  }
 }
 
 exports.getRentalById = (req, res) => {
