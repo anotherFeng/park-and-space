@@ -3,6 +3,8 @@ import { ActivateRoute, ActivatedRoute } from '@angular/router';
 import { RentalService } from '../rental.service';
 import { Rental } from '../rental.model';
 
+import { HttpErrorResponse } from '@angular/common/http';
+
 @Component({
   selector: 'bnb-rental-search',
   templateUrl: './rental-search.component.html',
@@ -27,11 +29,14 @@ export class RentalSearchComponent implements OnInit {
   };
 
   getSearchRentals() {
+    this.error = '';
+    this.rentals = [];
+
     this.rentalService.getRentalsByCity(this.city).subscribe(
       (rentals: Rental[]) => {
         this.rentals = rentals;
       },
-      (err) => {
+      (err: HttpErrorResponse) => {
         this.error = err.error;
       }
     );

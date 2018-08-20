@@ -18,4 +18,8 @@ export class HeaderComponent {
     this.authService.logout();
     this.router.navigate(['/rentals']);
   }
+
+  public search(city: string): void {
+    city ? this.router.navigate([`/rentals/${city}/homes`]) : this.router.navigate(['/rentals']);
+  }
 }
