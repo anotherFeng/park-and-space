@@ -39,6 +39,7 @@
     "mongoose": "^5.2.6",
     "ng2-daterangepicker": "^2.0.12",
     "ngx-pipes": "^2.3.5",
+    "ngx-toastr": "^9.0.2",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },

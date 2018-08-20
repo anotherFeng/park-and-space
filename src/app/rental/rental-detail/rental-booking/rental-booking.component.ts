@@ -1,12 +1,15 @@
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { DaterangePickerComponent } from 'ng2-daterangepicker';
 import { Booking } from '../../../booking/booking.model';
 import { Rental } from '../../rental.model';
 import { HelperService } from '../../../shared/service/helper.service';
 import { BookingService } from '../../../booking/booking.service';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
   selector: 'bnb-rental-booking',
   templateUrl: './rental-booking.component.html',
   styleUrls: ['./rental-booking.component.scss']
@@ -14,6 +17,11 @@ import { BookingService } from '../../../booking/booking.service';
 export class RentalBookingComponent implements OnInit {
 
   @Input() rental: Rental;
+  @ViewChild(DaterangePickerComponent)
+    private picker: DaterangePickerComponent;
+
+  @ViewChild('bookingNotesTitle')
+    private somePtag: ElementRef;
 
   newBooking: Booking;
   modalRef: any;
@@ -31,12 +39,15 @@ export class RentalBookingComponent implements OnInit {
   constructor(
     private helperService: HelperService,
     private bookingService: BookingService,
+    private toastrService: ToastrService,
     private modalService: NgbModal
-  ) { };
+  ) { 
+  };
 
   ngOnInit() {
     this.newBooking = new Booking;
     this.getBookedOutDate();
+    this.somePtag.nativeElement.style.color = "red";
   };
 
   private checkForInvalidDates(date) {
@@ -58,6 +69,12 @@ export class RentalBookingComponent implements OnInit {
     this.bookedOutDates.push(...bookedRange);
   }
 
+  private resetDatePicker() {
+    this.picker.datePicker.setStartDate(moment());
+    this.picker.datePicker.setEndDate(moment());
+    this.picker.datePicker.element.val('');
+  }
+
   public openConfirmModal(content) {
     this.error = '';
     this.modalRef = this.modalService.open(content);
@@ -70,18 +87,21 @@ export class RentalBookingComponent implements OnInit {
         this.addNewBookedDates(response)
         this.newBooking = new Booking();
         this.modalRef.close();
+        this.resetDatePicker();
+        this.toastrService.success(`Congratulation! You have succesfully booked this rental place!`, `Success`)
       },
       (err) => {
         this.error = err.error;
-      }
+      } 
     );
   };
 
   public selectedDate(value: any, datepicker?: any) {
-      this.newBooking.startAt = this.helperService.formatBookingDate(value.start);
-      this.newBooking.endAt = this.helperService.formatBookingDate(value.end);
-      this.newBooking.days = -(value.start.diff(value.end, 'days'));
-      this.newBooking.totalPrice = this.newBooking.days * this.rental.dailyRate;
+    this.options.autoUpdateInput = true;
+    this.newBooking.startAt = this.helperService.formatBookingDate(value.start);
+    this.newBooking.endAt = this.helperService.formatBookingDate(value.end);
+    this.newBooking.days = -(value.start.diff(value.end, 'days'));
+    this.newBooking.totalPrice = this.newBooking.days * this.rental.dailyRate;
   };
 
 };
