@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivateRoute, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { RentalService } from '../rental.service';
 import { Rental } from '../rental.model';
 
