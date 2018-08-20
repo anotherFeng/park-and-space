@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { DaterangePickerComponent } from 'ng2-daterangepicker';
 import { Booking } from '../../../booking/booking.model';
 import { Rental } from '../../rental.model';
@@ -9,6 +9,7 @@ import { HelperService } from '../../../shared/service/helper.service';
 import { BookingService } from '../../../booking/booking.service';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
   selector: 'bnb-rental-booking',
   templateUrl: './rental-booking.component.html',
   styleUrls: ['./rental-booking.component.scss']
@@ -91,7 +92,7 @@ export class RentalBookingComponent implements OnInit {
       },
       (err) => {
         this.error = err.error;
-      }
+      } 
     );
   };
 

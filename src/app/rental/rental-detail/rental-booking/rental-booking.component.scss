@@ -1,5 +1,19 @@
 @import 'variables';
 
+.daterangepicker {
+  td {
+    &.in-range{
+      background-color: #ffa9a9;
+    }
+    &.active {
+      background-color: $main-color !important;
+      &:hover {
+        background-color: $main-color !important;
+      }
+    }
+  }
+}
+
 .booking {
   padding: 20px;
   border: 1px solid $light-gray-color;
