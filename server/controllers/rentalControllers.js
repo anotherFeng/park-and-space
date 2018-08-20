@@ -17,8 +17,8 @@ exports.getRentals = (req, res) => {
     .catch((err) => {
       console.log(err)
       res.status(404).send(err)
-    })
-}
+    });
+};
 
 exports.getRentalById = (req, res) => {
   const rentalId = req.params.id;
@@ -31,8 +31,8 @@ exports.getRentalById = (req, res) => {
     })
     .catch((err) => {
       res.status(422).send(err)
-    })
-}
+    });
+};
 
 exports.createRental = (req, res) => {
   const { title, city, street, category, image, shared, bedrooms, description, dailyRate } = req.body;
@@ -46,5 +46,5 @@ exports.createRental = (req, res) => {
     })
     .catch((err) => {
       res.status(422).send(err)
-    })
-}
+    });
+};
