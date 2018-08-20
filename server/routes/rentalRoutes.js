@@ -6,7 +6,6 @@ router.route('/:id')
   .get(rentalCtrl.getRentalById)
 router.route('/')
   .get(rentalCtrl.getRentals)
-
-
+  .post(userCtrl.authMiddleware, rentalCtrl.createRental)
 
 module.exports = router;
