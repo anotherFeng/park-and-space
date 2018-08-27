@@ -1,90 +1,79 @@
 {
   "rentals": [{
-      "title": "Nice view on ocean",
-      "city": "San Francisco",
-      "street": "Main street",
-      "category": "condo",
-      "image": "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-      "bedrooms": 4,
-      "shared": false,
-      "description": "Very nice apartment in center of the city.",
-      "dailyRate": 43
+      "title": "Cheap Storage Units!",
+      "city": "Brooklyn",
+      "street": "Smith st",
+      "category": "storage",
+      "image": "https://imgur.com/9eSVoap",
+      "space": 700,
+      "surveillance": false,
+      "description": "Lots of cheap storage units near downtown Brooklyn.",
+      "dailyRate": 20
       },
       {
-      "title": "Modern apartment in center",
+      "title": "Modern garage in Manhattan!",
       "city": "New York",
       "street": "Time Square",
-      "category": "apartment",
-      "image": "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-      "bedrooms": 1,
-      "shared": true,
-      "description": "Very nice apartment in center of the city.",
-      "dailyRate": 11
+      "category": "garage",
+      "image": "https://imgur.com/a/S2uZD25",
+      "space": 300,
+      "surveillance": true,
+      "description": "Garage at the heart of manhattan with surveillance system",
+      "dailyRate": 60
       },
       {
-      "title": "Old house in nature",
-      "city": "Spisska Nova Ves",
-      "street": "Banicka 1",
-      "category": "house",
-      "image": "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-      "bedrooms": 5,
-      "shared": false,
-      "description": "Very nice apartment in center of the city.",
-      "dailyRate": 23
+      "title": "Midtown Office",
+      "city": "New York",
+      "street": "Lenox Ave",
+      "category": "office",
+      "image": "https://imgur.com/a/bYvdISy",
+      "space": 1500,
+      "surveillance": false,
+      "description": "Office with great view over midtown.",
+      "dailyRate": 400
     },
     {
-      "title": "Amazing modern place",
-      "city": "San Francisco",
-      "street": "Green street",
-      "category": "house",
-      "image": "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-      "bedrooms": 2,
-      "shared": false,
-      "description": "Hiking routes 10 min walking away",
-      "dailyRate": 140
+      "title": "Garage/storage space near Newark Airport",
+      "city": "Newark",
+      "street": "Bergen st",
+      "category": "garage",
+      "image": "https://imgur.com/byFq4k8",
+      "space": 450,
+      "surveillance": false,
+      "description": "Garage/storage space near Newark Airport for rent.  Minimum 10days only.",
+      "dailyRate": 15
       },
       {
-      "title": "Apartment In China Town",
-      "city": "San Francisco",
+      "title": "Commercial warehouse",
+      "city": "Newark",
       "street": "Union Street",
-      "category": "apartment",
-      "image": "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-      "bedrooms": 3,
-      "shared": false,
-      "description": "Very nice apartment in China Town",
-      "dailyRate": 89
+      "category": "storage",
+      "image": "https://imgur.com/a/WSzNORa",
+      "space": 3000,
+      "surveillance": false,
+      "description": "3000 square feet per unit, we do not rent smaller than that",
+      "dailyRate": 79
       },
       {
-      "title": "House with Garden",
+      "title": "Garment Center Office Space For Rent",
       "city": "New York",
-      "street": "Long Island, Queens",
-      "category": "house",
-      "image": "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-      "bedrooms": 6,
-      "shared": false,
-      "description": "Very nice house in Long Island with garden",
+      "street": "Garment District",
+      "category": "office",
+      "image": "https://imgur.com/a/wszA4K6",
+      "space": 500,
+      "surveillance": true,
+      "description": "Virgo Business Centers Garment Center Office Space For Shortterm rental.",
       "dailyRate": 189
-    },
-    {
-      "title": "Cozy modern Condo",
-      "city": "New York",
-      "street": "Penn Station",
-      "category": "condo",
-      "image": "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-      "bedrooms": 3,
-      "shared": true,
-      "description": "Building close to Penn Station",
-      "dailyRate": 68
     }
   ],
   "users": [{
-    "username": "Test User",
+    "username": "Test",
     "email": "test@gmail.com",
-    "password": "testtest"
+    "password": "123456"
     },{
-    "username": "Test User1",
-    "email": "test1@gmail.com",
-    "password": "testtest1"
+    "username": "Feng",
+    "email": "admin@gmail.com",
+    "password": "123456"
     }
   ]
 }

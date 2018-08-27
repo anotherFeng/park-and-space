@@ -14,7 +14,7 @@ export class RentalCreateComponent implements OnInit {
   error: string = '';
 
   constructor(
-    private rentalService: RentalService;
+    private rentalService: RentalService
   ) { }
 
   ngOnInit() {
