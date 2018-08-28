@@ -10,10 +10,10 @@ export class Rental {
   street: string;
   category: string;
   image: string;
-  bedrooms: number;
+  space: number;
   description: string;
   dailyRate: number;
-  shared: boolean;
+  surveillance: boolean;
   createdAt: string;
   bookings: Booking[];
 }

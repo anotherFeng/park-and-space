@@ -12,7 +12,8 @@ import { RentalModule } from './rental/rental.module';
 import { AuthModule } from './auth/auth.module';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/rentals', pathMatch: 'full'},
+  {path: '', redirectTo: '/', pathMatch: 'full'},
+  {path: 'rentals', redirectTo: '/rentals', pathMatch: 'full'},
 ]
 
 @NgModule({
