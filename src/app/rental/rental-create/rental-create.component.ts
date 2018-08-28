@@ -19,13 +19,13 @@ export class RentalCreateComponent implements OnInit {
 
   ngOnInit() {
     this.newRental = new Rental();
-    this.newRental.shared = false;
+    this.newRental.surveillance = false;
   }
 
   createRental() {
     this.rentalService.createRental(this.newRental).subscribe(
       (response) => {
-        
+
       },
       (err) => {
         this.error = err.error;
