@@ -7,17 +7,17 @@ exports.login = (req, res) => {
   if(!password || !email) {
     return res.status(422).send('Data missing!')
   };
-  
   User.findUser(email)
     .then((foundUser) => {
       if(foundUser.hasSamePassword(password)) {
         const token = jwt.sign({
           userId: foundUser.id,
-          username: foundUser.username
+          username: foundUser.username,
         }, process.env.JWT_SECRET, {expiresIn: '1h'});
 
         return res.json(token);
       } else {
+
         res.status(422).send("Wrong email or password");
       }
     })
